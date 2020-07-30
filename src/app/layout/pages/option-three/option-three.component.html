@@ -1,0 +1,27 @@
+<mat-toolbar class="uk-position-fixed uk-position-top" style="z-index: 2;">
+  <a (click)="drawer.toggle()"
+    ><mat-icon aria-hidden="false" aria-label="Menú">menu</mat-icon></a
+  >
+  <img
+    src="../../../../assets/images/logo.svg"
+    alt="Logo"
+    width="80"
+    class="uk-navbar-item uk-logo"
+  />
+</mat-toolbar>
+
+<mat-drawer-container class="container">
+  <mat-drawer #drawer mode="over">
+    <div class="uk-section uk-margin-top">
+      <app-layout-mobile-menu
+        styleClass="black-text"
+        [menu]="menuList"
+      ></app-layout-mobile-menu>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div style="margin-top: 70px;">
+      <ng-content></ng-content>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

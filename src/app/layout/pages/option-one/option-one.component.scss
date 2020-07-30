@@ -1,0 +1,33 @@
+mat-drawer-container.container {
+  min-height: 200px;
+
+  mat-drawer {
+    background-color: #000000;
+    width: 300px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+  }
+  mat-drawer-content {
+    .menu {
+      a {
+        color: #000000;
+        transition: color 500ms;
+
+        &::after {
+          content: "Menú";
+          position: absolute;
+          transform: translate(10px, 5px);
+          font-family: 'Archivo Black', sans-serif;
+          font-size: 1em;
+        }
+        &:hover {
+          color: #4385f5;
+        }
+        mat-icon {
+          font-size: 2em;
+        }
+      }
+    }
+  }
+}

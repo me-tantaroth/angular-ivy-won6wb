@@ -1,0 +1,56 @@
+<app-admin-layout>
+  <h1 class="uk-heading-divider">Pelicula</h1>
+  <ng-template
+    let-movie
+    [ngTemplateOutletContext]="{ $implicit: item | async }"
+    [ngTemplateOutlet]="movieT"
+    #movieT
+  >
+    <div class="uk-section-xsmall" *ngIf="movie; else loadingT">
+      <div *ngIf="movie?.uuid; else notFoundT">
+        <ul class="uk-breadcrumb uk-background-muted uk-padding-small">
+          <li><a routerLink="/movies/list">Peliculas</a></li>
+          <li>
+            <span> {{ movie?.title.es }} </span>
+          </li>
+        </ul>
+
+        <div uk-grid>
+          <div class="uk-width-1-1 uk-width-1-2@s">
+            <img [src]="movie?.cover" [alt]="movie?.title?.es" />
+          </div>
+          <div class="uk-width-1-1 uk-width-1-2@s">
+            <h2>{{ movie?.title?.es }}</h2>
+            <p>{{ movie?.description?.es }}</p>
+          </div>
+        </div>
+        <div class="uk-section-xsmall">
+          <ul class="uk-subnav uk-subnav-pill" uk-switcher>
+            <li *ngFor="let movieOption of movie?.url?.es; let iOption = index">
+              <a href="#">Opción {{ iOption + 1 }} </a>
+            </li>
+          </ul>
+
+          <ul class="uk-switcher uk-margin">
+            <li *ngFor="let movieOption of movie?.url?.es">
+              <iframe
+                [src]="sanitizer.bypassSecurityTrustResourceUrl(movieOption)"
+                width="100%"
+                height="400vh"
+                frameborder="0"
+              ></iframe>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</app-admin-layout>
+
+<ng-template #notFoundT>
+  <h1>No existe la pelicula</h1>
+</ng-template>
+<ng-template #loadingT>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>

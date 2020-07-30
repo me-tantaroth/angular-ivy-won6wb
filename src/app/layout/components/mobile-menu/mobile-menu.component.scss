@@ -1,0 +1,52 @@
+@mixin link-active {
+  background-color: #4385f5;
+
+  a {
+    color: #ffffff;
+  }
+}
+
+li.black-text {
+  a {
+    color: #222222 !important;
+  }
+
+  &:hover {
+    background-color: #f5f5f5 !important;
+  }
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  & > li {
+    padding: 15px 0;
+    text-align: center;
+    transition: background-color 1s;
+
+    &.router-link-active {
+      @include link-active();
+    }
+
+    &:hover {
+      background-color: #4385f5;
+
+      a {
+        color: #ffffff;
+      }
+    }
+
+    a {
+      color: #666666;
+      font-size: 1.3rem;
+      text-decoration: none;
+      font-family: "Archivo Black", sans-serif;
+
+      &.router-link-active {
+        @include link-active();
+      }
+    }
+  }
+}

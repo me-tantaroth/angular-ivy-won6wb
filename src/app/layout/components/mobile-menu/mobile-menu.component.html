@@ -1,0 +1,33 @@
+<div align="center">
+  <a href=""
+    ><img
+      src="../../../../assets/images/logo.svg"
+      alt="Takto Internacional"
+      title="Takto Internacional"
+      width="100"
+      class="uk-navbar-item uk-logo"
+  /></a>
+</div>
+<p>&nbsp;</p>
+<ul>
+  <li
+    *ngFor="let item of menu"
+    routerLinkActive="router-link-active"
+    [ngClass]="styleClass"
+  >
+    <a
+      *ngIf="item && item.type === 'inner'; else fullPath"
+      [routerLink]="item.path"
+      routerLinkActive="router-link-active"
+      >{{ item.text }}</a
+    >
+    <ng-template #fullPath>
+      <a
+        [href]="item.path"
+        [target]="item.redirect ? '_blank' : '_self'"
+        routerLinkActive="router-link-active"
+        >{{ item.text }}</a
+      >
+    </ng-template>
+  </li>
+</ul>

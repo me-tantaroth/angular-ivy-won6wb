@@ -1,0 +1,26 @@
+<div class="uk-height-1-1 auth-content">
+  <div class="uk-flex uk-flex-center uk-flex-middle">
+    <div class="uk-width-1-1 uk-width-1-2@s">
+      <div class="uk-text-center">
+        <img
+          src="../../assets/images/logo.svg"
+          alt="Logo Takto Internacional"
+          class="logo"
+        />
+      </div>
+      <app-sign-in
+        *ngIf="page === 'sign-in'; else PageSignUpT"
+        [(page)]="page"
+      ></app-sign-in>
+      <ng-template #PageSignUpT>
+        <app-sign-up
+          *ngIf="page === 'sign-up'; else PageForgotPasswordT"
+          [(page)]="page"
+        ></app-sign-up>
+        <ng-template #PageForgotPasswordT>
+          <app-forgot-password [(page)]="page"></app-forgot-password>
+        </ng-template>
+      </ng-template>
+    </div>
+  </div>
+</div>

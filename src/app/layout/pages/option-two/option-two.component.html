@@ -1,0 +1,109 @@
+<mat-drawer-container class="container">
+  <mat-drawer #drawer mode="over">
+    <div class="uk-section">
+      <app-layout-mobile-menu [menu]="menu"></app-layout-mobile-menu>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div class="uk-position-relative">
+      <div
+        class="uk-position-relative uk-visible-toggle uk-light uk-height-large"
+        tabindex="-1"
+        uk-slideshow="animation: fade"
+      >
+        <ul class="uk-slideshow-items min-height">
+          <li
+            class="uk-background-blend-multiply uk-background-muted uk-background-cover uk-height-small uk-panel uk-flex uk-flex-center uk-flex-middle uk-height-large"
+            style="
+              background-image: url(https://getuikit.com/docs/images/photo.jpg);
+            "
+          >
+            <div
+              class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom"
+            >
+              <h3 class="uk-margin-remove">Bottom</h3>
+              <p class="uk-margin-remove">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </p>
+            </div>
+          </li>
+          <li
+            class="uk-background-blend-multiply uk-background-muted uk-background-cover uk-height-small uk-panel uk-flex uk-flex-center uk-flex-middle uk-height-large"
+            style="
+              background-image: url(https://getuikit.com/docs/images/dark.jpg);
+            "
+          >
+            <div
+              class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom"
+            >
+              <h3 class="uk-margin-remove">Bottom</h3>
+              <p class="uk-margin-remove">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </p>
+            </div>
+          </li>
+          <li
+            class="uk-background-blend-multiply uk-background-muted uk-background-cover uk-height-small uk-panel uk-flex uk-flex-center uk-flex-middle uk-height-large"
+            style="
+              background-image: url(https://getuikit.com/docs/images/light.jpg);
+            "
+          >
+            <div
+              class="uk-overlay uk-overlay-primary uk-position-right uk-text-center uk-transition-slide-right uk-width-medium"
+            >
+              <h3 class="uk-margin-remove">Left</h3>
+              <p class="uk-margin-remove">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </p>
+            </div>
+          </li>
+        </ul>
+
+        <a
+          class="uk-position-center-left uk-position-small uk-hidden-hover"
+          href="#"
+          uk-slidenav-previous
+          uk-slideshow-item="previous"
+        ></a>
+        <a
+          class="uk-position-center-right uk-position-small uk-hidden-hover"
+          href="#"
+          uk-slidenav-next
+          uk-slideshow-item="next"
+        ></a>
+      </div>
+      <div class="uk-position-top">
+        <div class="uk-container uk-container-small">
+          <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
+            <div class="uk-navbar-left">
+              <a
+                class="uk-navbar-toggle uk-hidden@m"
+                uk-navbar-toggle-icon
+                (click)="drawer.toggle()"
+              ></a>
+              <ul class="uk-navbar-nav">
+                <li class="uk-active">
+                  <img
+                    src="../../../../assets/images/logo.svg"
+                    alt="Logo"
+                    width="100"
+                    class="uk-navbar-item uk-logo"
+                  />
+                </li>
+              </ul>
+            </div>
+
+            <div class="uk-navbar-right uk-visible@m">
+              <ul class="uk-navbar-nav">
+                <li *ngFor="let item of menu">
+                  <a [routerLink]="[item.text]">{{ item.text }}</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <ng-content></ng-content>
+  </mat-drawer-content>
+</mat-drawer-container>

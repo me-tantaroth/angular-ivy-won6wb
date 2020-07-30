@@ -1,0 +1,53 @@
+mat-list.nav {
+  mat-list-item {
+    &:hover {
+      background-color: rgba($color: #000000, $alpha: 0.04);
+      cursor: pointer;
+    }
+  }
+}
+
+ul.uk-nav {
+  li {
+    a {
+      mat-icon {
+        transform: translateY(6px);
+        padding-right: 20px;
+      }
+      [uk-icon] {
+        padding-right: 16px;
+      }
+    }
+  }
+}
+
+.close-button {
+  transform: translateY(-12px);
+}
+.home-color {
+  color: black;
+}
+.profile-color {
+  color: green;
+}
+.referers-color {
+  color: #1e87f0;
+}
+.security-color {
+  color: #9e9e1e;
+}
+.notification-color {
+  color: orange;
+}
+.movies-color {
+  color: brown;
+}
+.books-color {
+  color: purple;
+}
+
+.container-notifications {
+  mat-drawer {
+    background-color: #222222;
+  }
+}

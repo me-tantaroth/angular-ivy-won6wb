@@ -1,0 +1,36 @@
+@mixin uk-navbar-content {
+  background-color: white;
+}
+.max-height {
+  max-height: 500px;
+}
+
+mat-drawer {
+  background-color: #1e87f0;
+  width: 300px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+}
+
+nav {
+  .uk-navbar-toggle {
+    color: #1e87f0;
+  }
+  .uk-navbar-left {
+    @include uk-navbar-content;
+  }
+  .uk-navbar-right {
+    @include uk-navbar-content;
+
+    a {
+      font-family: "Archivo Black", sans-serif;
+      color: black;
+
+      &:hover {
+        background: #1e87f0;
+        color: white;
+      }
+    }
+  }
+}

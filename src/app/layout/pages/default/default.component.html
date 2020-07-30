@@ -1,0 +1,23 @@
+<mat-drawer-container class="container">
+  <mat-drawer #drawer mode="over">
+    <div class="uk-section">
+      <app-layout-mobile-menu [menu]="menu"></app-layout-mobile-menu>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-layout-web-menu [menu]="menu">
+      <div navbar-toggle class="uk-hidden@m">
+        <a
+          class="uk-navbar-toggle"
+          uk-navbar-toggle-icon
+          href="javascript:;"
+          (click)="drawer.toggle()"
+        ></a>
+      </div>
+    </app-layout-web-menu>
+    <div class="uk-container uk-container-small uk-section uk-section-xsmall" uk-height-viewport>
+      <ng-content></ng-content>
+    </div>
+    <app-layout-footer></app-layout-footer>
+  </mat-drawer-content>
+</mat-drawer-container>

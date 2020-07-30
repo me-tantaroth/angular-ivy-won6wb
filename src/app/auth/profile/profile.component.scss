@@ -1,0 +1,18 @@
+.auth-content {
+  background-color: #fdfdfd;
+  overflow-y: auto;
+
+  .logo {
+    height: 100px;
+  }
+  .input-hint {
+    position: absolute;
+    top: 5vh;
+    left: 0;
+    font-size: 11px;
+  }
+}
+
+.text-white {
+  color: white;
+}

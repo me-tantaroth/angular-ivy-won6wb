@@ -1,0 +1,64 @@
+<div class="uk-height-1-1 auth-content">
+  <div class="uk-flex uk-flex-center uk-flex-middle">
+    <div class="uk-width-1-1 uk-width-1-2@s">
+      <span id="toTop"></span>
+      <div class="uk-container uk-section">
+        <div
+          uk-alert
+          class="uk-alert-{{ alert?.color || 'primary' }}"
+          *ngIf="alert"
+        >
+          <a class="uk-alert-close" uk-close></a>
+          <h3>Noticia</h3>
+          <p [innerHTML]="alert?.message"></p>
+        </div>
+
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Pagos</mat-card-title>
+            <mat-card-subtitle>{{
+              (currentUser | async)?.platformJoined ? "Plataforma" : "Afiliado"
+            }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <div *ngIf="!payed; else ThanksT">
+              <p>
+                Por favor debe pagar el valor de
+                {{
+                  (currentUser | async)?.platformJoined ? "$ 10 USD" : "$ 1 USD"
+                }}
+                a Takto Internacional, para poder continuar.
+              </p>
+              <button
+                type="button"
+                class="uk-button uk-button-secondary uk-button-large uk-align-center"
+                (click)="updatePay($event)"
+              >
+                Pagar
+              </button>
+            </div>
+            <ng-template #ThanksT>
+              <h1 class="uk-text-success">
+                ¡Gracias, ahora ya eres parte de la familia Takto Internacional!
+              </h1>
+              <p>Ingresa y descubre todo lo que tenemos para ti.</p>
+            </ng-template>
+          </mat-card-content>
+          <mat-card-actions>
+            <div class="uk-text-right uk-section-xsmall">
+              <button
+                type="button"
+                [disabled]="!payed"
+                mat-raised-button
+                color="primary"
+                routerLink="/dashboard"
+              >
+                Ingresar
+              </button>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<div
+  class="uploader uk-flex uk-flex-center uk-flex-middle"
+  [ngStyle]="{ 'background-image': 'url(' + image + ')' }"
+  appUploaderSelect (base64)="selectFile($event)"
+>
+  <span *ngIf="annotation">{{ annotation }}</span>
+  <input type="file" [accept]="accept" />
+</div>

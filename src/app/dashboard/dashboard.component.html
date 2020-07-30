@@ -1,0 +1,96 @@
+<app-admin-layout>
+  <ng-template
+    let-currentUser
+    [ngTemplateOutletContext]="{ $implicit: currentUser | async }"
+    [ngTemplateOutlet]="currentUserT"
+    #currentUserT
+  >
+    <div *ngIf="currentUser" class="uk-container uk-section">
+      <div
+        class="uk-child-width-1-2@s uk-child-width-1-3@m uk-grid-match"
+        uk-grid
+      >
+        <div>
+          <div
+            class="uk-card uk-card-hover uk-card-body"
+            routerLink="/auth/profile"
+          >
+            <h3 class="uk-card-title">
+              Bienvenido
+              <b>{{ currentUser.firstName }}!</b>
+            </h3>
+            <div class="uk-text-center">
+              <img
+                [src]="currentUser?.photoURL"
+                [alt]="currentUser?.firstName + '' + currentUser?.middleName"
+                class="uk-border-circle"
+                width="150"
+                height="150"
+              />
+              <p>Ingresa a tu <a routerLink="/auth/profile">perfíl</a></p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+            <h3 class="uk-card-title">
+              Tu cuenta vence en
+              <b>{{ currentUser.expirationDate.toDate() | date }}</b>
+            </h3>
+            <div class="uk-text-center uk-section-xsmall">
+              <div>Te quedan</div>
+              <br />
+              <div style="font-size: 4rem;">
+                {{ lessDay || 0 }}
+              </div>
+              <p>&nbsp;</p>
+              <div style="font-size: 2rem;">Días</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div
+            class="uk-card uk-card-primary uk-card-hover uk-card-body uk-light"
+            routerLink="/affiliates"
+          >
+            <h3 class="uk-card-title">
+              <a routerLink="/affiliates">Afiliados</a>
+            </h3>
+            <div
+              class="uk-text-center uk-section-xsmall"
+              style="font-size: 4rem;"
+            >
+              {{ (affiliates | async)?.length || 0 }}
+            </div>
+            <br />
+            <p>
+              Actualmente tienes
+              <b>{{ (affiliates | async)?.length || 0 }}</b> afiliados, agrega
+              {{ ((affiliates | async)?.length || 0) > 0 ? "más" : "un" }}
+              {{
+                ((affiliates | async)?.length || 0) > 0
+                  ? "afiliados"
+                  : "afiliado"
+              }}
+              compartiendo tu link de usuario con tus amigos y sean parte de la
+              familia Takto Internacional.
+            </p>
+          </div>
+        </div>
+        <!-- <div>
+          <div
+            class="uk-card uk-card-secondary uk-card-hover uk-card-body uk-light"
+          >
+            <h3 class="uk-card-title">Secondary</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+          </div>
+        </div> -->
+      </div>
+
+      <!-- <pre>
+      {{ currentUser | json }}
+    </pre
+      > -->
+    </div>
+  </ng-template>
+</app-admin-layout>

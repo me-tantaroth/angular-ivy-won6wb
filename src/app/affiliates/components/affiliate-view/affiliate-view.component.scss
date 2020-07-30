@@ -1,0 +1,24 @@
+mat-card {
+  mat-card-subtitle {
+    mat-icon {
+      font-size: 12px;
+    }
+
+    .text-created {
+      color: purple;
+    }
+    .text-email-verified {
+      color: orange;
+    }
+    .text-payed {
+      color: green;
+    }
+  }
+}
+.item-click {
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba($color: #000000, $alpha: 0.1);
+  }
+}

@@ -1,4 +1,37 @@
-/* Add application styles & imports to this file! */
+/* You can add global styles to this file, and also import other style files */
+
+html,
 body {
-  background-color: aliceblue;
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-body,
+.mat-body-1,
+.mat-typography {
+  font-size: 16px;
+}
+
+.archivo-black-font {
+  font-family: "Archivo Black", sans-serif;
+}
+
+a[mat-button],
+a[mat-raised-button],
+a[mat-stroke-button],
+a[mat-flat-button] {
+  &:hover, &:hover * {
+    text-decoration: none;
+    color: initial;
+  }
+}
+
+[mat-icon-button] {
+  [uk-icon] {
+    display: flex;
+    transform: translate(9px, 0px);
+  }
 }

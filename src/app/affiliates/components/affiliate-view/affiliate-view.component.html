@@ -1,0 +1,72 @@
+<ng-template
+  let-item
+  [ngTemplateOutletContext]="{ $implicit: affiliate | async }"
+  [ngTemplateOutlet]="itemT"
+  #itemT
+>
+  <div>
+    <mat-card class="item-click" [routerLink]="['detail', item?.uid]">
+      <mat-card-header>
+        <div
+          mat-card-avatar
+          class="uk-background-cover"
+          [ngStyle]="{ backgroundImage: 'url(' + item?.photoURL + ')' }"
+        ></div>
+        <mat-card-title>
+          {{ item?.firstName }} {{ item?.middleName }}
+        </mat-card-title>
+        <mat-card-subtitle>
+          <mat-icon
+            [ngClass]="{
+              'text-created': item?.status === 'created',
+              'text-email-verified': item?.status === 'emailVerified',
+              'text-payed': item?.status === 'payed',
+              'uk-text-success': item?.status === 'enabled',
+              'uk-text-muted': item?.status === 'disabled',
+              'uk-text-primary': item?.status === 'pendingData'
+            }"
+            >done_outline</mat-icon
+          >
+          <span class="uk-text-success" [ngSwitch]="item?.status">
+            <span *ngSwitchCase="'created'" class="text-created">Creado</span>
+            <span *ngSwitchCase="'emailVerified'" class="text-email-verified"
+              >Correo Verificado</span
+            >
+            <span *ngSwitchCase="'payed'" class="text-payed">Pagó</span>
+            <span *ngSwitchCase="'enabled'">Activo</span>
+            <span *ngSwitchCase="'disabled'" class="uk-text-muted"
+              >Inactivo</span
+            >
+            <span *ngSwitchCase="'pendingData'" class="uk-text-primary"
+              >Datos pendientes</span
+            >
+          </span>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p class="uk-text-warning" *ngIf="item?.expirationDate">
+          <b>Fecha de vencimiento: </b>
+          {{ item?.expirationDate.toDate() | date }}
+        </p>
+        <p *ngIf="item?.username">
+          <b>Nombre de usuario: </b> {{ item?.username }}
+        </p>
+        <p *ngIf="item?.email"><b>Correo: </b> {{ item?.email }}</p>
+        <p *ngIf="item?.gender">
+          <b>Génder: </b>
+          <span [ngSwitch]="item?.gender">
+            <span *ngSwitchCase="'male'">Masculino</span>
+            <span *ngSwitchCase="'female'">Femenino</span>
+            <span *ngSwitchDefault>Otro</span>
+          </span>
+        </p>
+        <p *ngIf="item?.city"><b>Ciudad: </b> {{ item?.city }}</p>
+        <p *ngIf="item?.mobile"><b>Móvil: </b> {{ item?.mobile }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <!-- <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button> -->
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</ng-template>

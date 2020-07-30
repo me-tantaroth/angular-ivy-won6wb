@@ -1,0 +1,37 @@
+.uploader {
+  background-color: #ffffff;
+  background-image: url(/assets/images/face.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  border-radius: 100vh;
+  transition: background-color 1s;
+
+  input[type="file"] {
+    display: none;
+  }
+
+  & > span {
+    display: block;
+    background-color: rgba($color: #ffffff, $alpha: 0.8);
+    color: #4385f5;
+    padding: 1px 10px;
+    font-size: 0.8em;
+    font-weight: bold;
+    opacity: 0;
+    width: 100%;
+    text-align: center;
+    transition: opacity 1s;
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+
+    & > span {
+      opacity: 1;
+    }
+  }
+}

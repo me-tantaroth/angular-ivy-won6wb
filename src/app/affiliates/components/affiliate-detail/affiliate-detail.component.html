@@ -1,0 +1,172 @@
+<app-admin-layout>
+  <h1 class="uk-heading-divider">Detalle del Afiliado</h1>
+  <div class="uk-section-xsmall" *ngIf="affiliate | async; else loadingT">
+    <ng-template
+      let-item
+      [ngTemplateOutletContext]="{ $implicit: affiliate | async }"
+      [ngTemplateOutlet]="itemT"
+      #itemT
+    >
+      <div>
+        <div class="uk-text-center">
+          <img
+            [src]="item?.photoURL"
+            [alt]="item?.firstName + '' + item?.middleName"
+            class="uk-border-circle"
+          />
+          <h2>
+            {{ item?.firstName }} {{ item?.secondName }} {{ item?.middleName }}
+            {{ item?.lastName }}
+          </h2>
+          <div class="uk-flex uk-flex-center">
+            <div class="uk-section-xsmall uk-text-justify">
+              <div class="uk-section-xsmall">
+                <mat-card>
+                  <ul class="uk-list status">
+                    <li
+                      [ngClass]="{
+                        'uk-text-muted': !(
+                          item?.status === 'created' ||
+                          item?.status === 'emailVerified' ||
+                          item?.status === 'pendingData' ||
+                          item?.status === 'payed'
+                        ),
+                        'text-created':
+                          item?.status === 'created' ||
+                          item?.status === 'emailVerified' ||
+                          item?.status === 'pendingData' ||
+                          item?.status === 'payed'
+                      }"
+                    >
+                      <mat-icon>{{
+                        item?.status === "created" ||
+                        item?.status === "emailVerified" ||
+                        item?.status === "pendingData" ||
+                        item?.status === "payed"
+                          ? "check"
+                          : "clear"
+                      }}</mat-icon>
+                      <span>{{
+                        item?.status === "created" ||
+                        item?.status === "emailVerified" ||
+                        item?.status === "pendingData" ||
+                        item?.status === "payed"
+                          ? "Registrado correctamente"
+                          : "No se ha registrado aún"
+                      }}</span>
+                    </li>
+                    <li
+                      [ngClass]="{
+                        'uk-text-muted': !(
+                          item?.status === 'emailVerified' ||
+                          item?.status === 'pendingData' ||
+                          item?.status === 'payed'
+                        ),
+                        'text-email-verified':
+                          item?.status === 'emailVerified' ||
+                          item?.status === 'pendingData' ||
+                          item?.status === 'payed'
+                      }"
+                    >
+                      <mat-icon>{{
+                        item?.status === "emailVerified" ||
+                        item?.status === "pendingData" ||
+                        item?.status === "payed"
+                          ? "check"
+                          : "clear"
+                      }}</mat-icon>
+                      <span>{{
+                        item?.status === "emailVerified" ||
+                        item?.status === "pendingData" ||
+                        item?.status === "payed"
+                          ? "Ya verificó el correo electrónico"
+                          : "No ha verificado el correo de su cuenta"
+                      }}</span>
+                    </li>
+                    <li
+                      [ngClass]="{
+                        'uk-text-muted': !(
+                          item?.status === 'pendingData' ||
+                          item?.status === 'payed'
+                        ),
+                        'uk-text-primary':
+                          item?.status === 'pendingData' ||
+                          item?.status === 'payed'
+                      }"
+                    >
+                      <mat-icon>{{
+                        item?.status === "pendingData" ||
+                        item?.status === "payed"
+                          ? "check"
+                          : "clear"
+                      }}</mat-icon>
+                      <span>
+                        {{
+                          item?.status === "emailVerified" ||
+                          item?.status === "pendingData" ||
+                          item?.status === "payed"
+                            ? "Ya Ingresó los datos pendientes"
+                            : "No agregado los datos pendientes de actividad económica y nivel de escolaridad"
+                        }}</span
+                      >
+                    </li>
+                    <li
+                      [ngClass]="{
+                        'uk-text-muted': !(item?.status === 'payed'),
+                        'text-payed': item?.status === 'payed'
+                      }"
+                    >
+                      <mat-icon>{{
+                        item?.status === "payed" ? "check" : "clear"
+                      }}</mat-icon>
+                      <span>{{
+                        item?.status === "emailVerified" ||
+                        item?.status === "pendingData" ||
+                        item?.status === "payed"
+                          ? "Ha efectuado correctamente el pago"
+                          : "No ha hecho el pago"
+                      }}</span>
+                    </li>
+                  </ul>
+                </mat-card>
+              </div>
+              <p class="uk-text-warning" *ngIf="item?.expirationDate">
+                <b>Fecha de vencimiento: </b>
+                {{ item?.expirationDate.toDate() | date }}
+              </p>
+              <p *ngIf="item?.username">
+                <b>Nombre de usuario: </b> {{ item?.username }}
+              </p>
+              <p *ngIf="item?.email"><b>Correo: </b> {{ item?.email }}</p>
+              <p *ngIf="item?.typeDocument && item?.numberDocument">
+                <b>Documento: </b>
+                <span class="uk-text-uppercase"
+                  >{{ item?.typeDocument }} -</span
+                >
+                {{ item?.numberDocument }}
+              </p>
+              <p *ngIf="item?.employment?.work">
+                <b>Actividad económica: </b> {{ item?.employment?.work }}
+              </p>
+              <p *ngIf="item?.gender">
+                <b>Génder: </b>
+                <span [ngSwitch]="item?.gender">
+                  <span *ngSwitchCase="'male'">Masculino</span>
+                  <span *ngSwitchCase="'female'">Femenino</span>
+                  <span *ngSwitchDefault>Otro</span>
+                </span>
+              </p>
+              <p *ngIf="item?.country"><b>País: </b> {{ item?.country }}</p>
+              <p *ngIf="item?.city"><b>Ciudad: </b> {{ item?.city }}</p>
+              <p *ngIf="item?.mobile"><b>Móvil: </b> {{ item?.mobile }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</app-admin-layout>
+
+<ng-template #loadingT>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>

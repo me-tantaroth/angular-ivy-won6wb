@@ -1,0 +1,270 @@
+<app-admin-layout>
+  <div class="uk-height-1-1 auth-content">
+    <div class="uk-flex uk-flex-center uk-flex-middle">
+      <div class="uk-width-1-1 uk-width-1-2@s">
+        <span id="toTop"></span>
+        <div class="uk-container uk-section">
+          <mat-progress-bar *ngIf="loader" mode="indeterminate"></mat-progress-bar>
+
+          <div
+            uk-alert
+            class="uk-alert-{{ alert?.color || 'primary' }}"
+            *ngIf="alert"
+          >
+            <a class="uk-alert-close" uk-close></a>
+            <h3>Noticia</h3>
+            <p [innerHTML]="alert?.message"></p>
+          </div>
+
+          <ng-template
+            let-currentUser
+            [ngTemplateOutletContext]="{ $implicit: currentUser | async }"
+            [ngTemplateOutlet]="currentUserT"
+            *ngIf="currentUser | async; else LoadingT"
+            #currentUserT
+          >
+            <form
+              [formGroup]="formGroup"
+              (submit)="onSubmit($event, currentUser)"
+            >
+              <mat-card>
+                <mat-card-header>
+                  <mat-card-title>Cuenta</mat-card-title>
+                  <mat-card-subtitle>Perfil</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                  <div class="uk-section-xsmall uk-flex uk-flex-center">
+                    <div>
+                      <app-uploader
+                        annotation="Cambiar"
+                        [image]="
+                          currentUser?.photoURL || '/assets/images/face.png'
+                        "
+                        (selected)="imageSelected = $event"
+                        accept="images/*"
+                      ></app-uploader>
+
+                      <h5
+                        class="uk-text-center uk-text-muted uk-text-uppercase"
+                      >
+                        {{
+                          currentUser?.role === "user"
+                            ? "Usuario"
+                            : "Administrador"
+                        }}
+                      </h5>
+                    </div>
+                  </div>
+
+                  <div class="uk-text-center">
+                    <div class="uk-padding-small">
+                      <mat-form-field class="uk-width-1-1" appearance="fill">
+                        <mat-label
+                          (click)="
+                            onCopy(
+                              $event,
+                              'https://taktoint.com/usuario/' + f.username.value
+                            )
+                          "
+                          >Link para compartir a tus afiliados</mat-label
+                        >
+                        <input
+                          matInput
+                          [value]="
+                            'https://taktoint.com/usuario/' + f.username.value
+                          "
+                          (click)="
+                            onCopy(
+                              $event,
+                              'https://taktoint.com/usuario/' + f.username.value
+                            )
+                          "
+                          readonly
+                          disabled
+                        />
+                        <a
+                          [href]="
+                            'https://api.whatsapp.com/send?text=Hola%20soy%20' +
+                            f.firstName.value +
+                            '%20' +
+                            f.middleName.value +
+                            '%2C%20te%20env%C3%ADo%20este%20link%20para%20que%20puedas%20registrarte%20en%20Takto%20Internacional%20y%20ganar%20dinero%20https%3A%2F%2Ftaktoint.com%2Fusuario%2F' +
+                            f.username.value +
+                            '&source=&data=&app_absent='
+                          "
+                          target="_blank"
+                          mat-icon-button
+                          matSuffix
+                        >
+                          <span
+                            uk-icon="whatsapp"
+                            style="color: #1ebea5;"
+                          ></span>
+                        </a>
+                      </mat-form-field>
+
+                      <br />
+                      <button
+                        type="button"
+                        mat-raised-button
+                        color="primary"
+                        (click)="
+                          onCopy(
+                            $event,
+                            'https://taktoint.com/usuario/' + f.username.value
+                          )
+                        "
+                      >
+                        Comparte este link con tu afiliado
+                      </button>
+                    </div>
+                  </div>
+                  <mat-form-field class="uk-width-1-1">
+                    <mat-label>Primer Nombre</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="firstName"
+                      required
+                    />
+                    <mat-error *ngIf="f.firstName.hasError('required')">
+                      El primer nombre es <strong>obligatorio</strong>
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="uk-width-1-1">
+                    <mat-label>Segundo Nombre</mat-label>
+                    <input matInput type="text" formControlName="secondName" />
+                  </mat-form-field>
+                  <mat-form-field class="uk-width-1-1">
+                    <mat-label>Primer Apellido</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="middleName"
+                      required
+                    />
+                    <mat-error *ngIf="f.middleName.hasError('required')">
+                      El primer apellido es <strong>obligatorio</strong>
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="uk-width-1-1">
+                    <mat-label>Segundo Apellido</mat-label>
+                    <input matInput type="text" formControlName="lastName" />
+                  </mat-form-field>
+                  <!-- <mat-form-field class="uk-width-1-3">
+                  <mat-label>Tipo de documento</mat-label>
+                  <mat-select
+                    matTooltip="Tipo de documento"
+                    formControlName="typeDocument"
+                    required
+                  >
+                    <mat-option
+                      *ngFor="let item of typesDocument | async"
+                      [value]="item.value"
+                    >
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field> -->
+                  <!-- <mat-form-field class="uk-width-2-3">
+                  <mat-label>Número de documento</mat-label>
+                  <input
+                    matInput
+                    type="number"
+                    formControlName="numberDocument"
+                    required
+                  />
+                  <mat-error *ngIf="f.numberDocument.hasError('required')">
+                    El número de documento es <strong>obligatorio</strong>
+                  </mat-error>
+                </mat-form-field> -->
+                  <mat-form-field class="uk-width-1-1">
+                    <mat-label>Género</mat-label>
+                    <mat-select
+                      matTooltip="Género"
+                      formControlName="gender"
+                      required
+                    >
+                      <mat-option
+                        *ngFor="let item of genders | async"
+                        [value]="item.value"
+                      >
+                        {{ item.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field class="uk-width-1-2">
+                    <mat-label>Departamento</mat-label>
+                    <mat-select
+                      matTooltip="Departamento"
+                      formControlName="department"
+                      (selectionChange)="onChangeDepartment($event)"
+                      required
+                    >
+                      <mat-option
+                        *ngFor="let item of departments | async"
+                        [value]="item.value"
+                      >
+                        {{ item.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field class="uk-width-1-2">
+                    <mat-label>Ciudad</mat-label>
+                    <mat-select
+                      matTooltip="Ciudad"
+                      formControlName="city"
+                      required
+                    >
+                      <mat-option
+                        *ngFor="let item of cities | async"
+                        [value]="item.value"
+                      >
+                        {{ item.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field class="uk-width-1-1">
+                    <mat-label>Teléfono Móvil</mat-label>
+                    <span matPrefix>+57 &nbsp;</span>
+                    <input
+                      matInput
+                      type="tel"
+                      formControlName="mobile"
+                      placeholder="300-000-1234"
+                      required
+                    />
+                    <mat-error *ngIf="f.mobile.hasError('required')">
+                      El teléfono móvil es <strong>obligatorio</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </mat-card-content>
+                <mat-card-actions>
+                  <div class="uk-text-right uk-section-xsmall">
+                    <button type="submit" mat-raised-button color="primary">
+                      Actualizar
+                    </button>
+                  </div>
+                </mat-card-actions>
+              </mat-card>
+            </form>
+          </ng-template>
+
+          <!-- <div class="uk-section-small">
+            <button
+              mat-button
+              color="primary"
+              class="uk-text-large uk-width-1-1"
+              routerLink="/dashboard"
+            >
+              Volver
+            </button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</app-admin-layout>
+<ng-template #LoadingT>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>

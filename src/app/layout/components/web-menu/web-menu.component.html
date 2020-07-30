@@ -1,0 +1,48 @@
+<div
+  uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar"
+>
+  <div class="navbar-background">
+    <nav
+      class="uk-navbar-container uk-container uk-container-small uk-navbar-transparent"
+      uk-navbar
+      style="position: relative; z-index: 980;"
+    >
+      <div class="uk-navbar-left">
+        <ng-content select="[navbar-toggle]"></ng-content>
+        <ul class="uk-navbar-nav">
+          <li>
+            <a routerLink="/" class="uk-padding-remove"
+              ><img
+                _ngcontent-qjd-c23=""
+                src="../../../../assets/images/logo-justify.svg"
+                alt="Takto Internacional"
+                title="Takto Internacional"
+                width="130"
+                class="uk-navbar-item uk-logo"
+            /></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="uk-navbar-right">
+        <ul class="uk-navbar-nav">
+          <li *ngFor="let item of menu" class="menu-item uk-visible@m">
+            <a
+              *ngIf="item && item.type === 'inner'; else fullPath"
+              [routerLink]="item.path"
+              routerLinkActive="uk-active"
+              >{{ item.text }}</a
+            >
+            <ng-template #fullPath>
+              <a
+                [href]="item.path"
+                [target]="item.redirect ? '_blank' : '_self'"
+                routerLinkActive="uk-active"
+              >{{ item.text }}</a>
+            </ng-template>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>

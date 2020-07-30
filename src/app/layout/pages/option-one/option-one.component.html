@@ -1,0 +1,25 @@
+<mat-drawer-container class="container">
+  <mat-drawer #drawer [mode]="sideNavMode" opened>
+    <div class="uk-section">
+      <app-layout-mobile-menu [menu]="menu"></app-layout-mobile-menu>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div
+      class="menu uk-container uk-container-small uk-margin-top"
+    >
+      <a href="javascript:;" (click)="drawer.toggle()">
+        <mat-icon aria-hidden="false" aria-label="Menú Principal"
+          >menu</mat-icon
+        >
+      </a>
+    </div>
+    <img
+      src="../../../../assets/images/logo.svg"
+      alt="Logo"
+      width="150"
+      class="uk-align-center"
+    />
+    <ng-content></ng-content>
+  </mat-drawer-content>
+</mat-drawer-container>

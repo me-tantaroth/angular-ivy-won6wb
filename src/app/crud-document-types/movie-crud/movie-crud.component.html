@@ -1,0 +1,137 @@
+<app-admin-layout>
+  <h1 class="uk-heading-divider">Tipos de documento</h1>
+  <div class="uk-section-xsmall">
+    <mat-drawer-container autosize>
+      <mat-drawer
+        #drawer
+        class="uk-height-1-1 uk-width-1-2@s uk-width-1-3@m uk-padding-small"
+        position="end"
+        mode="side"
+      >
+        <speck-form [formGroup]="formGroup" (formSubmit)="onSubmit($event)">
+          <p class="uk-text-right">
+            <button mat-icon-button (click)="drawer.close()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </p>
+          <mat-progress-bar
+            *ngIf="loaderForm"
+            mode="indeterminate"
+          ></mat-progress-bar>
+
+          <form [formGroup]="formGroup" (submit)="loading($event)">
+            <mat-form-field class="uk-width-1-1">
+              <mat-label>Texto</mat-label>
+              <input
+                matInput
+                placeholder="Texto (Ej. Cédula de ciudadania)"
+                formControlName="text"
+              />
+            </mat-form-field>
+            <mat-form-field class="uk-width-1-1">
+              <mat-label>Ordenamiento</mat-label>
+              <input
+                matInput
+                type="number"
+                placeholder="Es el order en que se verán los datos"
+                formControlName="order"
+              />
+            </mat-form-field>
+
+            <button
+              type="submit"
+              [disabled]="loaderForm"
+              mat-raised-button
+              color="primary"
+            >
+              Guardar
+            </button>
+            <button
+              type="button"
+              mat-raised-button
+              color="warn"
+              class="uk-align-right"
+              (click)="onCancel($event)"
+            >
+              Cancelar
+            </button>
+          </form></speck-form
+        >
+      </mat-drawer>
+
+      <div>
+        <div class="uk-text-right uk-padding-small">
+          <button
+            mat-mini-fab
+            color="primary"
+            (click)="onAdd($event); drawer.toggle()"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+      <speck-list [list]="list" [actions]="actions" (next)="onNext($event)">
+        <div items uk-grid>
+          <div
+            *ngFor="let item of list | async; let i = index"
+            class="uk-width-1-1 uk-width-1-3@s uk-width-1-4@m"
+          >
+            <p
+              class="uk-text-center"
+              [ngClass]="{
+                'uk-text-muted': !item?.status || item?.status === 'DRAFT',
+                'uk-text-success': item?.status === 'PUBLISHED'
+              }"
+            >
+              {{ item?.status === "PUBLISHED" ? "PÚBLICO" : "PRIVADO" }}
+            </p>
+            <div class="uk-position-absolute uk-padding-small">
+              <a
+                href="#toggle-usage-{{ i }}"
+                mat-mini-fab
+                color="default"
+                uk-toggle="animation: uk-animation-fade"
+              >
+                <mat-icon>more_vert</mat-icon>
+              </a>
+
+              <div
+                id="toggle-usage-{{ i }}"
+                class="uk-card uk-card-default uk-card-body uk-margin-small"
+                hidden
+              >
+                <ul class="uk-nav uk-nav-default">
+                  <li>
+                    <a class="uk-text-success" (click)="onPublish($event, item)"
+                      >Publicar</a
+                    >
+                  </li>
+                  <li>
+                    <a class="uk-text-primary" (click)="onEdit($event, item)"
+                      >Editar</a
+                    >
+                  </li>
+                  <li>
+                    <a class="uk-text-danger" (click)="onDelete($event, item)"
+                      >Delete</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <a
+              [routerLink]="'/books/view/' + item?.uuid"
+              [matTooltip]="item?.text?.es"
+            >
+              <img src="/assets/images/list-data.png" [alt]="item?.text?.es" />
+              <p class="uk-h4 uk-text-center">{{ item?.text?.es }}</p>
+            </a>
+          </div>
+        </div>
+        <div blocks>
+          No hay datos
+        </div></speck-list
+      >
+    </mat-drawer-container>
+  </div>
+</app-admin-layout>

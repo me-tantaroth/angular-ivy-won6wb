@@ -1,0 +1,288 @@
+<mat-drawer-container class="uk-width-1-1 uk-height-1-1" autosize>
+  <mat-drawer
+    #drawer
+    class="uk-width-1-1 uk-width-1-3@s uk-width-1-4@m"
+    mode="over"
+  >
+    <ng-template
+      let-currentUser
+      [ngTemplateOutletContext]="{ $implicit: currentUser | async }"
+      [ngTemplateOutlet]="currentUserT"
+      *ngIf="currentUser | async; else LoadingT"
+      #currentUserT
+    >
+      <div class="uk-padding-small" *ngIf="currentUser">
+        <ul class="uk-nav-default uk-nav-parent-icon" uk-nav>
+          <li class="uk-nav-header">
+            Menú
+            <button
+              type="button"
+              mat-icon-button
+              class="uk-float-right close-button uk-hidden@s"
+              (click)="drawer.close()"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+          </li>
+          <li>
+            <a (click)="drawer.close()" routerLink="/home"
+              ><mat-icon>arrow_back</mat-icon> Página Principal</a
+            >
+          </li>
+          <li>
+            <a
+              (click)="drawer.close()"
+              routerLink="/dashboard"
+              class="home-color"
+              ><mat-icon>home</mat-icon> Incio</a
+            >
+          </li>
+          <li>
+            <a
+              (click)="drawer.close()"
+              routerLink="/auth/profile"
+              class="profile-color"
+              ><mat-icon>account_circle</mat-icon> Perfil</a
+            >
+          </li>
+          <li>
+            <a
+              (click)="drawer.close()"
+              routerLink="/auth/change-password"
+              class="security-color"
+              ><mat-icon>admin_panel_settings</mat-icon> Seguridad</a
+            >
+          </li>
+          <li>
+            <a
+              (click)="drawer.close()"
+              routerLink="/affiliates"
+              class="referers-color"
+              ><mat-icon>people</mat-icon> Afiliados</a
+            >
+          </li>
+          <li class="uk-nav-divider"></li>
+          <ng-template #UserMenuT>
+            <li>
+              <a
+                (click)="drawer.close()"
+                routerLink="/movies/list"
+                class="movies-color"
+                ><mat-icon>movie</mat-icon> Películas</a
+              >
+            </li>
+            <li>
+              <a
+                (click)="drawer.close()"
+                routerLink="/books/list"
+                class="books-color"
+                ><mat-icon>library_books</mat-icon> Libros</a
+              >
+            </li>
+            <!-- <li>
+              <a
+                (click)="drawer.close()"
+                routerLink="/dashboard"
+                class="uk-hidden"
+                ><mat-icon>headset</mat-icon> Audio Libros</a
+              >
+            </li> -->
+            <li>
+              <a
+                (click)="drawer.close()"
+                routerLink="/dashboard"
+                class="home-color"
+                ><mat-icon>article</mat-icon> Material de capacitación</a
+              >
+            </li>
+            <li>
+              <a
+                (click)="drawer.close()"
+                routerLink="/dashboard"
+                class="home-color"
+                ><mat-icon>article</mat-icon> Documentación Legal</a
+              >
+            </li>
+            <li>
+              <a
+                (click)="drawer.close()"
+                routerLink="/dashboard"
+                class="home-color"
+                ><mat-icon>article</mat-icon> Herramientas</a
+              >
+            </li>
+            <li>
+              <a
+                (click)="drawer.close()"
+                routerLink="/dashboard"
+                class="home-color"
+                ><mat-icon>article</mat-icon> Términos y condiciones</a
+              >
+            </li>
+            <li class="uk-nav-divider"></li>
+          </ng-template>
+          <ng-template #AdminMenuT>
+            <li>
+              <a
+                (click)="drawer.close()"
+                routerLink="/movies/manage"
+                class="movies-color"
+                ><mat-icon>movie</mat-icon> Gestionar Películas</a
+              >
+            </li>
+            <li>
+              <a
+                (click)="drawer.close()"
+                routerLink="/books/manage"
+                class="books-color"
+                ><mat-icon>library_books</mat-icon> Gestionar Libros</a
+              >
+            </li>
+            <!-- <li>
+              <a (click)="drawer.close()" routerLink="/dashboard"
+                ><mat-icon>headset</mat-icon> Gestionar Audio Libros</a
+              >
+            </li> -->
+            <li>
+              <a (click)="drawer.close()" routerLink="/dashboard"
+                ><mat-icon>people</mat-icon> Gestionar Usuarios</a
+              >
+            </li>
+            <li>
+              <a (click)="drawer.close()" routerLink="/dashboard"
+                ><mat-icon>view_quilt</mat-icon> Gestionar Contenidos</a
+              >
+            </li>
+            <li>
+              <a (click)="drawer.close()" routerLink="/level-school/manage"
+                ><mat-icon>list</mat-icon> Gestionar Niveles de escolaridad</a
+              >
+            </li>
+            <li>
+              <a (click)="drawer.close()" routerLink="/document-type/manage"
+                ><mat-icon>list</mat-icon> Gestionar Tipos de documento</a
+              >
+            </li>
+            <li>
+              <a (click)="drawer.close()" routerLink="/genders/manage"
+                ><mat-icon>list</mat-icon> Gestionar Géneros</a
+              >
+            </li>
+            <li>
+              <a (click)="drawer.close()" routerLink="/countries/manage"
+                ><mat-icon>list</mat-icon> Gestionar Paises</a
+              >
+            </li>
+            <li>
+              <a (click)="drawer.close()" routerLink="/cities/manage"
+                ><mat-icon>list</mat-icon> Gestionar Ciudades</a
+              >
+            </li>
+            <li class="uk-nav-divider"></li
+          ></ng-template>
+          <li></li>
+          <ng-container
+            *ngTemplateOutlet="
+              currentUser.role === 'user' ? UserMenuT : AdminMenuT
+            "
+          >
+          </ng-container>
+          <li>
+            <a href="javascript:;" (click)="signOut()" class="uk-text-danger"
+              ><mat-icon>exit_to_app</mat-icon> Salir</a
+            >
+          </li>
+        </ul>
+      </div>
+    </ng-template>
+  </mat-drawer>
+
+  <div class="uk-height-1-1 uk-container uk-container-expand">
+    <div class="uk-container uk-section-xsmall">
+      <div iv class="uk-section-xsmall">
+        <div class="uk-clearfix">
+          <div class="uk-float-left">
+            <button
+              type="button"
+              mat-icon-button
+              color="primary"
+              aria-label="Menú"
+              (click)="drawer.toggle()"
+            >
+              <mat-icon>menu</mat-icon>
+            </button>
+          </div>
+          <div class="uk-float-right">
+            <a
+              (click)="drawer.close()"
+              routerLink="/auth/profile"
+              mat-icon-button
+              class="profile-color"
+              ><mat-icon>account_circle</mat-icon></a
+            >
+            <a
+              (click)="drawer.close()"
+              routerLink="/auth/change-password"
+              mat-icon-button
+              class="security-color"
+              ><mat-icon>admin_panel_settings</mat-icon></a
+            >
+
+            <ng-template
+              let-notificationsList
+              [ngTemplateOutletContext]="{ $implicit: notifications | async }"
+              [ngTemplateOutlet]="notificationsListT"
+              *ngIf="notifications | async; else LoadingT"
+              #notificationsListT
+            >
+              <a
+                mat-icon-button
+                class="notification-color"
+                (click)="drawerNotifications.toggle()"
+                [disabled]="
+                  !(notificationsList && notificationsList.length > 0)
+                "
+                ><mat-icon>notification_important</mat-icon></a
+              >
+            </ng-template>
+          </div>
+        </div>
+      </div>
+
+      <mat-drawer-container
+        class="uk-width-1-1 uk-height-1-1 container-notifications"
+        autosize
+      >
+        <mat-drawer
+          #drawerNotifications
+          class="uk-width-1-2 uk-width-1-3@s uk-height-1-1 uk-padding-small"
+          mode="over"
+          position="end"
+        >
+          <mat-card
+            *ngFor="let item of notifications | async"
+            class="uk-margin-small-bottom"
+          >
+            {{ item.message }}
+            <div class="uk-text-right">
+              <button
+                mat-button
+                color="warn"
+                (click)="removeNotification(item); drawerNotifications.close()"
+              >
+                Quitar
+              </button>
+            </div>
+          </mat-card>
+        </mat-drawer>
+
+        <mat-card>
+          <ng-content></ng-content>
+        </mat-card>
+      </mat-drawer-container>
+    </div>
+  </div>
+</mat-drawer-container>
+<ng-template #LoadingT>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>

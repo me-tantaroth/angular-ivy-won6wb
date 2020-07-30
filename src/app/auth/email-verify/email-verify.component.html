@@ -1,0 +1,55 @@
+<div class="uk-height-1-1 auth-content">
+  <div class="uk-flex uk-flex-center uk-flex-middle">
+    <div class="uk-width-1-1 uk-width-1-2@s">
+      <div class="uk-container uk-section">
+        <mat-card>
+          <mat-card-content class="uk-text-center">
+            <div class="uk-section">
+              <mat-icon
+                class="email-icon"
+                aria-hidden="false"
+                aria-label="Email"
+                >mail_outline</mat-icon
+              >
+              <h1>Verifica tu correo electrónico</h1>
+              <p>
+                Se ha enviado un mensaje a tu correo
+                <b *ngIf="email">{{ email }}</b
+                >, por favor verifica tu cuenta revisando en tu bandeja de
+                entrada o en los correos no deseados.
+              </p>
+              <p>
+                Un vez verifiques tu cuenta, vuelve aquí y continuas el proceso
+                de ingreso
+              </p>
+              <p class="uk-section-small">
+                <button
+                  mat-raised-button
+                  color="primary"
+                  (click)="windowReload($event)"
+                >
+                  Continuar <mat-icon>arrow_right_alt</mat-icon>
+                </button>
+              </p>
+              <button
+                mat-button
+                color="primary"
+                (click)="sendEmailVerification($event)"
+              >
+                Enviar nuevo correo de verificación
+              </button>
+              <br />
+              <button
+                mat-button
+                color="warn"
+                (click)="signOut()"
+              >
+                Salir
+              </button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
