@@ -128,13 +128,13 @@ export class MovieCrudComponent implements OnInit {
 
     this.formGroup.patchValue({
       text: item.text.es,
-      uuid: item?.uuid,
-      status: item?.status,
-      createdAt: item?.createdAt,
+      uuid: item.uuid,
+      status: item.status,
+      createdAt: item.createdAt,
     });
 
-    console.log(item?.uuid);
-    this.uuid = item?.uuid;
+    console.log(item.uuid);
+    this.uuid = item.uuid;
 
     this.drawer.open();
   }

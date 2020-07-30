@@ -160,13 +160,13 @@ export class MovieCrudComponent implements OnInit {
       description: item.description.es,
       url: item.url.es[0],
       cover: item.cover,
-      uuid: item?.uuid,
-      status: item?.status,
-      createdAt: item?.createdAt,
+      uuid: item.uuid,
+      status: item.status,
+      createdAt: item.createdAt,
     });
 
-    console.log(item?.uuid);
-    this.uuid = item?.uuid;
+    console.log(item.uuid);
+    this.uuid = item.uuid;
 
     this.drawer.open();
   }

@@ -169,7 +169,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
           .pipe(
             map((user: UserModel) => {
               this.formGroup.patchValue({
-                photoURL: user?.photoURL || '/assets/images/face.png',
+                photoURL: user.photoURL || '/assets/images/face.png',
               });
 
               return user;
