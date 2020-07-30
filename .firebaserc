@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "takto-internacional": {
+      "hosting": {
+        "takto-web": [
+          "takto-internacional"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "takto-internacional"
+  }
+}
