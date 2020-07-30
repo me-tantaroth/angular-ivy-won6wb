@@ -22,7 +22,7 @@ import { MatSelectChange } from '@angular/material/select';
 import { Observable, of, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { UserModel } from '@app/auth/shared/models/user.model';
+import { UserModel } from '../auth/shared/models/user.model';
 import { User } from 'firebase';
 
 type WORK_TYPE = 'Estudiante' | 'Independiente' | 'Empleado';

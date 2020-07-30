@@ -17,7 +17,7 @@ import {
   mergeAll,
 } from 'rxjs/operators';
 
-import { UserModel } from '@app/auth/shared/models/user.model';
+import { UserModel } from '../auth/shared/models/user.model';
 
 interface Affiliate {
   user: DocumentReference;

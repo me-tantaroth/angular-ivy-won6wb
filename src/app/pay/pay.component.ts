@@ -5,7 +5,7 @@ import {
 } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 
-import { UserModel } from '@app/auth/shared/models/user.model';
+import { UserModel } from '../auth/shared/models/user.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';

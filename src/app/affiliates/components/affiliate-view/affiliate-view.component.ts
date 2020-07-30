@@ -6,7 +6,7 @@ import {
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
-import { UserModel } from '@app/auth/shared/models/user.model';
+import { UserModel } from '../auth/shared/models/user.model';
 
 @Component({
   selector: 'app-affiliate-view',

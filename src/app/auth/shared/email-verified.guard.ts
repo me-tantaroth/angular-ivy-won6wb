@@ -15,7 +15,7 @@ import * as firebase from 'firebase';
 import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
-import { UserModel } from '@app/auth/shared/models/user.model';
+import { UserModel } from '../auth/shared/models/user.model';
 
 @Injectable({
   providedIn: 'root',

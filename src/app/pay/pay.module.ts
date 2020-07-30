@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '@app/auth/shared/shared.module';
+import { SharedModule } from '../auth/shared/shared.module';
 import { PayRoutingModule } from './pay-routing.module';
 
 import { PayComponent } from './pay.component';

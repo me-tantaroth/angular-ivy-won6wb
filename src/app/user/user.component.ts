@@ -15,7 +15,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { UserModel } from '@app/auth/shared/models/user.model';
+import { UserModel } from '../auth/shared/models/user.model';
 interface Select {
   value: string;
   viewValue: string;
